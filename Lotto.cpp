@@ -1,45 +1,88 @@
 #include <iostream>
 #include <ctime>
+#include <vector>
+#include <algorithm>
 using namespace std;
 
+class FBall
+{
+public:
+		int number;
+
+};
+
+class FPocket
+{
+public:
+	FPocket()
+	{
+
+		for (int i = 0; i < 45l; ++i)
+		{
+			FBall NewBall;
+			NewBall.number = i + 1;
+			Balls.push_back(NewBall);
+
+		}
+
+	}
+
+
+
+
+	void Shuffle()
+	{
+		random_shuffle(Balls.begin(), Balls.end());
+	}
+
+	FBall Draw()
+	{
+		FBall DrawBall = *(Balls.begin());
+			Balls.erase(Balls.begin());
+			return DrawBall;
+	}
+
+	vector <FBall> Balls;
+};
 
 int main()
 {
-	int ball[45] = { 0 };
 
-	for (int i = 0; i < 45; i++)
+	FPocket* Pocket= new FPocket();
+	Pocket->Shuffle();
+
+	for(int i =0; i<6; ++i)
 	{
-
-		ball[i] = i + 1;
-		
+		cout << Pocket->Draw().number << endl;
 	}
 
-	
+	delete Pocket;
+	//int Ball[45];
+	//
+	//for (int i = 0; i < 45; i++)
+	//{
 
-	srand(time(0));
-	int Myball[6] = {0};
+	//	Ball[i] = i + 1;
+	//	
+	//}
 
-	for (int i = 0; i <= 5; i++)
-	{
-		int r = rand() % 45 + 1;
-		Myball[i] = ball[r];
-		//ball[r]
-		for (int j = 1; i + j <= 5 && 0<=i-j; j++)
-		{
-			if (Myball[i] == Myball[i+j] || Myball[i] == Myball[i - j])
-			{
-				cout << "중복입니다." << endl;
-				
-			}
-
-		
-		}
-		
-
-		cout << Myball[i] << endl;
+	//
+	//srand((unsigned int)time(0));
+	//for (int i = 0; i < 45 * 10000; ++i)
+	//{
+	//	int First = (rand() % 45);
+	//	int Second = (rand() % 45);
+	//	int Temp = Ball[First];
+	//	Ball[First] = Ball[Second];
+	//	Ball[Second] = Ball[Temp];
+	//}
 
 
-	}
+	//for (int i = 0; i < 6; ++i)
+	//{
+	//	
+	//	cout << Ball[i] << endl;
+	//}
 
 	return 0;
 }
